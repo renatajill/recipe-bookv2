@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Book </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="account.css"> 
+    <link rel="stylesheet" href="styles.css"> 
+  </head>
+  
+    <body>
+      <header>
+        <h1>Recipe Book</h1>
+        <nav id="no-auth">
+          <ul >
+            <li><a href="index.html">Home</a></li>
+            <li><a href="account.html">Recipes</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </nav>
+      
+        <nav id="auth">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="account.html">Recipes</a></li>
+            <li><a href="logout.html">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
+    
+      <main>
+        <section id="addNewRecipeDiv">
+          
+          <form id="addRecipeForm">
+            <h2>Add a Recipe</h2>
+            <div class="form-group">
+              <label for="recipeName">Name</label>
+              <input type="text" id="recipeName" required>
+            </div>
+            <div class="form-group">
+              <label for="file">Picture</label>
+              <input type="file" id="file" required>
+            </div>
+            <div class="form-group">
+              <label for="recipeIngredients">Ingredients</label>
+              <input type="text" id="recipeIngredients" required>
+            </div>
+            <div class="form-group">
+              <label for="recipeInstructions">Instructions</label>
+              <textarea id="recipeInstructions" required></textarea>
+            </div>
+            <button id="addRecipeBtn" type="submit">Add</button>
+          </form>
+        </section>
+    
+        <section id="savedRecipesDiv"></section>
+    
+        <div id="recipeModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalRecipeName"></h2>
+            <p id="modalIngredients"></p>
+            <p id="modalInstructions"></p>
+            <button id="deleteBtn">Delete Recipe</button>
+          </div>
+        </div>
+    
+        <div id="confirmationPopup" class="modal">
+          <div class="modal-content">
+            <p>Are you sure you want to delete this recipe?</p>
+            <button id="confirmDeleteBtn">Confirm</button>
+            <button id="cancelDeleteBtn">Cancel</button>
+          </div>
+        </div>
+      </main>
+    
+      <footer>
+        <p>&copy; 2023 Recipe Book. All rights reserved.</p>
+      </footer>
+    
+      <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+      <script src="script.js"></script>
+      
+     
+
+
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const authMenu = document.getElementById("auth");
+        const noAuthMenu = document.getElementById("no-auth");
+        firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            authMenu.style.display = "block";
+            noAuthMenu.style.display = "none";
+          } else {
+            noAuthMenu.style.display = "block";
+            authMenu.style.display = "none";
+            window.location = "index.html";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

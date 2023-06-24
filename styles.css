@@ -1,0 +1,66 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1, h2 {
+    font-family: 'Indie Flower', cursive;    
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 48px;
+
+}
+
+/* margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header styles */
+  header {
+    width: 100%;
+    background-color: #FF6347;
+    color: #fff;
+    padding: 15px;
+    padding-left: 0;
+    text-align: center;  
+  }
+  
+  /* Navigation styles */
+  nav {
+    width: 100%;
+    background-color: #FF8771;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    text-align: center;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  button {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  /* Footer styles */
+footer {
+    width: 100%;
+    background-color: #FF6347;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="index.css"> 
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  
+<body id="index-body">
+  <header>
+    <h1>Recipe Book</h1>
+  </header>
+  
+  <nav id="no-auth">
+    <ul >
+      <li><a href="index.html">Home</a></li>
+      <li><a href="account.html">Recipes</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="register.html">Register</a></li>
+    </ul>
+  </nav>
+
+  <nav id="auth">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="account.html">Recipes</a></li>
+      <li><a href="logout.html">Logout</a></li>
+    </ul>
+  </nav>
+  
+  <div class="banner">
+    <h2>Welcome to the Recipe Book!</h2>
+    <p>Explore a wide variety of delicious recipes.</p>
+    <a href="account.html" class="btn">Get Started</a>
+  </div>
+  
+  <section class="featured-recipes">
+       <div class="recipe-card">
+      <img src="assets/img/Butter-Chicken.jpg" alt="Butter Chicken picture">
+      <h3>Butter Chicken</h3>
+      <p> A super easy, full flavoured butter chicken recipe that rivals any restaurant or take out!</p>
+    </div>
+    <div class="recipe-card">
+      <img src="assets/img/img6.jpg" alt="Lasagna picture">
+      <h3>Lasagna</h3>
+      <p>Indulge in layers of rich flavors with this lasagna that will leave you craving for more!</p>
+    </div>
+    <div class="recipe-card">
+      <img src="assets/img/img5.jpg" alt="Avocado and salmon toast picture">
+      <h3>Avocado and salmon toast</h3>
+      <p>delightful combination of fresh salmon and creamy avocado on toasted bread, making it the perfect choice for a quick and healthy meal!</p>
+    </div>
+  </section>
+  
+  <footer>
+    <p>&copy; 2023 Recipe Book. All rights reserved.</p>
+  </footer>
+
+
+  
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  </body>
+</html>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDLNaqC3Zpf7K7lqhPb6yP587E8MyrhfxQ",
+
+authDomain: "humber-87697.firebaseapp.com",
+
+projectId: "humber-87697",
+
+storageBucket: "humber-87697.appspot.com",
+
+messagingSenderId: "392599396438",
+
+appId: "1:392599396438:web:4bae958a205bf35a129bf7",
+
+measurementId: "G-5G5C6QW4XP"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const authMenu = document.getElementById("auth");
+    const noAuthMenu = document.getElementById("no-auth");
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        authMenu.style.display = "block";
+        noAuthMenu.style.display = "none";
+      } else {
+        noAuthMenu.style.display = "block";
+        authMenu.style.display = "none";
+      }
+    });
+  });
+</script>

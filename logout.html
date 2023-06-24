@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logout</title>
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  </body>
+</html>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDLNaqC3Zpf7K7lqhPb6yP587E8MyrhfxQ",
+
+authDomain: "humber-87697.firebaseapp.com",
+
+projectId: "humber-87697",
+
+storageBucket: "humber-87697.appspot.com",
+
+messagingSenderId: "392599396438",
+
+appId: "1:392599396438:web:4bae958a205bf35a129bf7",
+
+measurementId: "G-5G5C6QW4XP"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        firebase.auth().signOut();
+      } else {
+        window.location = "login.html";
+      }
+    });
+  });
+</script>

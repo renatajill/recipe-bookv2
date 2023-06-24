@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="register.css"> 
+    <link rel="stylesheet" href="styles.css">
+    <title>Register</title>
+    
+  </head>
+  <body>
+    <header>
+      <h1>Recipe Book</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="account.html">Recipes</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <form class="register-form" id="registerFormEl">
+        <h1>Register</h1>
+        <input id="name" type="text" placeholder="Username" required>
+        <input id="email" type="email" placeholder="Email" required>
+        <input id="password" type="password" placeholder="Password" required>
+        <input id="password2" type="password" placeholder="Confirm Password" required>
+        <button id="buttonRegister" type="submit">Register</button>
+        <p class="message">Already registered? <a href="login.html">Login</a></p>
+      </form>
+    </div>
+
+    <footer>
+      <p>&copy; 2023 Recipe Book. All rights reserved.</p>
+    </footer>
+   
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  </body>
+</html>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDLNaqC3Zpf7K7lqhPb6yP587E8MyrhfxQ",
+
+authDomain: "humber-87697.firebaseapp.com",
+
+projectId: "humber-87697",
+
+storageBucket: "humber-87697.appspot.com",
+
+messagingSenderId: "392599396438",
+
+appId: "1:392599396438:web:4bae958a205bf35a129bf7",
+
+measurementId: "G-5G5C6QW4XP"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("ready");
+
+    const nameEl = document.getElementById("name");
+    const emailEl = document.getElementById("email");
+    const passwordEl = document.getElementById("password");
+    const password2El = document.getElementById("password2")
+    const registerBtnEl = document.getElementById("registerBtn");
+
+    function addUserToDb(uid, name) {
+      if (uid && name) {    
+        firebase
+        .firestore()
+        .collection("Users")
+        .doc(uid)
+        .set({
+          name: name,
+          userId: uid,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => console.log("User successfully added to database"))
+        .catch((err) => console.log("Error adding user to the database", err)); }else {
+          console.log("uid or name not found uid:", uid, "name", name)
+        }
+    }
+
+    registerFormEl.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (
+        nameEl.value &&
+        emailEl.value &&
+        passwordEl.value &&
+        password2El.value
+      ) {
+        if (passwordEl.value===password2El.value) {
+          console.log("Clicked");
+
+          firebase
+          .auth()
+          .createUserWithEmailAndPassword(emailEl.value, passwordEl.value)
+          .then(() => {
+            console.log("User successfully created");
+            const user = firebase.auth().currentUser;
+
+            addUserToDb(user.uid, nameEl.value);
+            window.location = "index.html";
+          })
+          .catch((err) => console.log("Error creating user", err));
+        }else {
+          alert("Password doesn't match") 
+        }
+        
+      }
+    });
+  });
+</script>
